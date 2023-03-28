@@ -1,3 +1,4 @@
+using AdventureWorksAPI.Customer;
 using AdventureWorksAPI.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +17,14 @@ var app = builder.Build();
 // Address
 
 // Customer
+app.MapGet("/customers", CustomerMethods.GetCustomers);
+app.MapGet("/customer", CustomerMethods.GetCustomer);
+
+
 
 // Product
 
 // SalesOrderHeader
+
+
+app.Run();
