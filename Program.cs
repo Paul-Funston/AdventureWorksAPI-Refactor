@@ -21,7 +21,7 @@ var app = builder.Build();
 app.MapGet("/customers", CustomerMethods.GetCustomers);
 
 //CREATE
-app.MapPost("/customer/create", CustomerMethods.AddCustomer);
+app.MapPost("/customers/create", CustomerMethods.AddCustomer);
 
 
 
