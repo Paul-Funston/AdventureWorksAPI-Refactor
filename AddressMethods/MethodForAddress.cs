@@ -27,7 +27,6 @@ namespace AdventureWorksAPI.AddressMethods
             }
             
         }
-
         public static IResult Create(AdventureWorksLt2019Context db, Address address)
         {
             db.Add(address);
