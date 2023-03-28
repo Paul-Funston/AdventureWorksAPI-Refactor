@@ -1,4 +1,5 @@
-using AdventureWorksAPI.Address;
+
+using AdventureWorksAPI.AddressMethods;
 using AdventureWorksAPI.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -22,5 +23,5 @@ var app = builder.Build();
 
 // SalesOrderHeader
 app.MapGet("/address", MethodForAddress.GetAddress);
-
+app.MapPost("/address", MethodForAddress.Create);
 app.Run();
