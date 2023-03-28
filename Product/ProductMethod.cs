@@ -11,7 +11,7 @@ namespace AdventureWorksAPI.Product
             {
                 return Results.NotFound();
             }
-
+            
             return Results.Ok(product);
         }
     }

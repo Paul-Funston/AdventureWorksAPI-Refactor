@@ -19,8 +19,8 @@ var app = builder.Build();
 // Customer
 
 // Product
-app.MapGet("/product", ProductMethod.GetProduct);
- 
+app.MapGet("/product/{ID}", ProductMethod.GetProduct);
+
 // SalesOrderHeader
 
 app.Run();
