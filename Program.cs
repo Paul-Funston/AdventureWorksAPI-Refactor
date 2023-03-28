@@ -1,4 +1,4 @@
-using AdventureWorksAPI.Customer;
+using AdventureWorksAPI.CustomerMethod;
 using AdventureWorksAPI.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -17,8 +17,12 @@ var app = builder.Build();
 // Address
 
 // Customer
+// READ
 app.MapGet("/customers", CustomerMethods.GetCustomers);
 app.MapGet("/customer", CustomerMethods.GetCustomer);
+
+//CREATE
+app.MapPost("/customer/create", CustomerMethods.AddCustomer);
 
 
 

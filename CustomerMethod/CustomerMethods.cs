@@ -1,6 +1,8 @@
 ﻿using AdventureWorksAPI.Models;
+using System.Globalization;
+using System.Net;
 
-namespace AdventureWorksAPI.Customer
+namespace AdventureWorksAPI.CustomerMethod
 {
     public static class CustomerMethods
     {
@@ -16,8 +18,14 @@ namespace AdventureWorksAPI.Customer
             return Results.Ok(db.Customers.Where(c => c.CustomerId == id));
         }
 
-        // CREATE: CreateCustomer method
+        // CREATE: CreateCustomer 
+        public static IResult AddCustomer(AdventureWorksLt2019Context db, Customer customer)
+        {
+            db.Customers.Add(customer);
+            db.SaveChanges();
 
+            return Results.Created($"/customer?id={customer.CustomerId}", customer);
+        }
 
 
     }
