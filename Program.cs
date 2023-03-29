@@ -29,7 +29,7 @@ app.MapPut("/product", ProductMethod.UpdateProduct);
 
 app.MapDelete("/product", ProductMethod.DeleteProduct);
 
-
+app.MapGet("/product/details/{productID}", ProductMethod.GetProductDetail);  
 
 // SalesOrderHeader
 app.MapGet("/saleorderheader", SaleOrderHeaderMethod.GetOrder);

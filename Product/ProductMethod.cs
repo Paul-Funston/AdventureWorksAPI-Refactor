@@ -60,6 +60,24 @@ namespace AdventureWorksAPI.Product
             return Results.Ok();
 
         }
+        public static IResult GetProductDetail(AdventureWorksLt2019Context db, int productID)
+        {
+
+                var result =   (from a in db.Products
+                               join b in db.ProductCategories
+                               on a.ProductCategoryId equals b.ProductCategoryId
+                               join c in db.ProductModels
+                               on a.ProductModelId equals c.ProductModelId
+                               where a.ProductId== productID
+                               select new {product=a,category=b,model=c}).FirstOrDefault();
+            if(result == null)
+            {
+                return Results.NotFound(productID);
+            }
+
+            return Results.Ok();
+
+        }
     }
 
 }
