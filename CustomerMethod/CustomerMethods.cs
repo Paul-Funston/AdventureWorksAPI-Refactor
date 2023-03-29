@@ -29,7 +29,7 @@ namespace AdventureWorksAPI.CustomerMethod
         }
 
         // UPDATE: UpdateCustomer
-        public static IResult UpdateCustomer(AdventureWorksLt2019Context db, int? id, Customer customer)
+        public static IResult UpdateCustomer(AdventureWorksLt2019Context db, int id, Customer customer)
         {
             Customer updatingCustomer = db.Customers.Find(id);
 
@@ -55,8 +55,24 @@ namespace AdventureWorksAPI.CustomerMethod
                 db.SaveChanges();
                 return Results.Ok();
             }
+        }
 
+        // DELETE: DeleteCustomer
+        public static IResult DeleteCustomer(AdventureWorksLt2019Context db, int id)
+        {
+            Customer customer = db.Customers.Find(id);
 
+            if (customer == null)
+            {
+                return Results.BadRequest();
+            }
+            else
+            {
+                db.Customers.Remove(customer);
+                db.SaveChanges();
+
+                return Results.Ok();
+            }
         }
     }
 }
