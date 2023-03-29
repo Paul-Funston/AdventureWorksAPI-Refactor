@@ -1,4 +1,5 @@
 ﻿using AdventureWorksAPI.Models;
+using NuGet.Protocol;
 using System.Globalization;
 using System.Net;
 
@@ -73,6 +74,32 @@ namespace AdventureWorksAPI.CustomerMethod
 
                 return Results.Ok();
             }
+        }
+
+        /*
+            Customer/AddToAddress should take a Customer and Address Primary Key as properties, and create a new middle table object, defaulting to Main Office as the AddressType. 
+        */
+
+        public static IResult AddCustomerToAddress(AdventureWorksLt2019Context db, int CustomerId, int AddressId)
+        {
+            Customer customer = db.Customers.First(c => c.CustomerId == CustomerId);
+            Address address = db.Addresses.First(a => a.AddressId == AddressId);
+            CustomerAddress customerAddress = new CustomerAddress();
+
+            if (customer != null || address != null)
+            {
+                customerAddress.CustomerId = CustomerId;
+                customerAddress.AddressId = AddressId;
+                customerAddress.AddressType = "Main Office";
+                customerAddress.Rowguid = new Guid();
+                customerAddress.ModifiedDate = DateTime.Now;
+
+                db.CustomerAddresses.Add(customerAddress);
+                db.SaveChanges();
+                return Results.Ok();
+            }
+
+            return Results.BadRequest();
         }
     }
 }
