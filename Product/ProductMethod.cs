@@ -69,7 +69,7 @@ namespace AdventureWorksAPI.Product
                                join c in db.ProductModels
                                on a.ProductModelId equals c.ProductModelId
                                where a.ProductId== productID
-                               select new {product=a,category=b,model=c}).FirstOrDefault();
+                               select new {product=a}).FirstOrDefault();
             if(result == null)
             {
                 return Results.NotFound(productID);
