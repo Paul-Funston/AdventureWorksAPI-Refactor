@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
@@ -44,7 +44,6 @@ public partial class AdventureWorksLt2019Context : DbContext
     public virtual DbSet<VProductAndDescription> VProductAndDescriptions { get; set; }
 
     public virtual DbSet<VProductModelCatalogDescription> VProductModelCatalogDescriptions { get; set; }
- 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

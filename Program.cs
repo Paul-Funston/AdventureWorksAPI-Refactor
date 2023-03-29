@@ -21,6 +21,8 @@ var app = builder.Build();
 // Address
 app.MapGet("/address", MethodForAddress.GetAddress);
 app.MapPost("/address", MethodForAddress.Create);
+app.MapDelete("/address/delete", MethodForAddress.Delete);
+app.MapPut("/address/update", MethodForAddress.Update);
 
 // Customer
 app.MapGet("/customers/{id}", CustomerMethods.GetCustomers);
