@@ -28,6 +28,35 @@ namespace AdventureWorksAPI.CustomerMethod
             return Results.Created($"/customer?id={customer.CustomerId}", customer);
         }
 
+        // UPDATE: UpdateCustomer
+        public static IResult UpdateCustomer(AdventureWorksLt2019Context db, int? id, Customer customer)
+        {
+            Customer updatingCustomer = db.Customers.Find(id);
 
+            if(updatingCustomer == null)
+            {
+                db.Customers.Add(customer);
+                db.SaveChanges();
+
+                return Results.Created($"/customer?id={customer.CustomerId}", customer);
+            } else
+            {
+                updatingCustomer.Title = customer.Title;
+                updatingCustomer.FirstName = customer.FirstName;
+                updatingCustomer.MiddleName = customer.MiddleName;
+                updatingCustomer.LastName = customer.LastName;
+                updatingCustomer.Suffix = customer.Suffix;
+                updatingCustomer.CompanyName = customer.CompanyName;
+                updatingCustomer.SalesPerson = customer.SalesPerson;
+                updatingCustomer.EmailAddress = customer.EmailAddress;
+                updatingCustomer.Phone = customer.Phone;
+                updatingCustomer.ModifiedDate = customer.ModifiedDate;
+
+                db.SaveChanges();
+                return Results.Ok();
+            }
+
+
+        }
     }
 }

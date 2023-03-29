@@ -21,8 +21,9 @@ app.MapGet("/address", MethodForAddress.GetAddress);
 app.MapPost("/address", MethodForAddress.Create);
 
 // Customer
-app.MapGet("/customers/{id}", CustomerMethods.GetCustomers);
+app.MapGet("/customers/{id?}", CustomerMethods.GetCustomers);
 app.MapPost("/customers/create", CustomerMethods.AddCustomer);
+app.MapPut("/customers/update/{id}", CustomerMethods.UpdateCustomer);
 
 // Product
 app.MapGet("/product", ProductMethod.GetProduct);
