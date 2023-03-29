@@ -14,6 +14,52 @@ namespace AdventureWorksAPI.Product
 
             return Results.Ok(product);
         }
+        public static IResult AddProduct(AdventureWorksLt2019Context db, AdventureWorksAPI.Models.Product product)
+        {
+            //test json : {"Name":"aaa","ProductNumber":"dddd"}
+            product.SellStartDate = DateTime.Now;
+            product.Rowguid = System.Guid.NewGuid();
+            product.ModifiedDate = System.DateTime.Now;
+
+            db.Products.Add(product);
+            db.SaveChanges();
+
+            return Results.Ok();
+
+        }
+        public static IResult UpdateProduct(AdventureWorksLt2019Context db, AdventureWorksAPI.Models.Product product)
+        {
+            //test json: {"ProductId":1000,"Name":"test"}"
+
+            AdventureWorksAPI.Models.Product? findedProduct = db.Products.Find(product.ProductId);
+
+            if (findedProduct == null)
+            {
+                return Results.NotFound(product.ProductId);
+            }
+
+            findedProduct.Name = product.Name;
+            db.SaveChanges();
+
+            return Results.Ok();
+
+        }
+        public static IResult DeleteProduct(AdventureWorksLt2019Context db, int productID)
+        {
+
+
+            AdventureWorksAPI.Models.Product? findedProduct = db.Products.Find(productID);
+
+            if (findedProduct == null)
+            {
+                return Results.NotFound(productID);
+            }
+            db.Products.RemoveRange(findedProduct);
+            db.SaveChangesAsync();
+
+            return Results.Ok();
+
+        }
     }
 
 }

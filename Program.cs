@@ -29,8 +29,9 @@ app.MapPut("/product", ProductMethod.UpdateProduct);
 
 app.MapDelete("/product", ProductMethod.DeleteProduct);
 
-// SalesOrderHeader
 
+
+// SalesOrderHeader
 app.MapGet("/saleorderheader", SaleOrderHeaderMethod.GetOrder);
 
 app.MapPost("/saleorderheader", SaleOrderHeaderMethod.AddOrder);
@@ -38,5 +39,6 @@ app.MapPost("/saleorderheader", SaleOrderHeaderMethod.AddOrder);
 app.MapPut("/saleorderheader", SaleOrderHeaderMethod.UpdateOrder);
 
 app.MapDelete("/saleorderheader", SaleOrderHeaderMethod.DeleteOrder);
+
 
 app.Run();
