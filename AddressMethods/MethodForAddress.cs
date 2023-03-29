@@ -66,8 +66,6 @@ namespace AdventureWorksAPI.AddressMethods
                 addresses.City = address.City;
                 addresses.CountryRegion = address.CountryRegion;
                 addresses.PostalCode = address.PostalCode;
-                //addresses.SalesOrderHeaderShipToAddresses = address.SalesOrderHeaderShipToAddresses;
-                //addresses.CustomerAddresses = address.CustomerAddresses;
                 addresses.ModifiedDate= address.ModifiedDate;
                 addresses.Rowguid = address.Rowguid;
                 addresses.StateProvince= address.StateProvince;
