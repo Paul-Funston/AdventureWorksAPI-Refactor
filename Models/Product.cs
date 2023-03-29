@@ -98,4 +98,6 @@ public partial class Product
     public virtual ProductModel? ProductModel { get; set; }
 
     public virtual ICollection<SalesOrderDetail> SalesOrderDetails { get; } = new List<SalesOrderDetail>();
+
+    public virtual ICollection<ProductDescription> ProductDescriptions { get; } = new List<ProductDescription>();
 }

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
+ 
 // SERVICES
 builder.Services.AddDbContext<AdventureWorksLt2019Context>(options =>
 {

@@ -26,7 +26,7 @@ public partial class AdventureWorksLt2019Context : DbContext
     public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
 
     public virtual DbSet<Product> Products { get; set; }
-
+     
     public virtual DbSet<ProductCategory> ProductCategories { get; set; }
 
     public virtual DbSet<ProductDescription> ProductDescriptions { get; set; }
