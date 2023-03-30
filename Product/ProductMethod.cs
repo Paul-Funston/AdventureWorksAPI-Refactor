@@ -55,14 +55,21 @@ namespace AdventureWorksAPI.Product
         {
 
 
-            AdventureWorksAPI.Models.Product? findedProduct = db.Products.Find(productID);
+            AdventureWorksAPI.Models.Product? findedProduct = db.Products.Find(productID);       
 
             if (findedProduct == null)
             {
                 return Results.NotFound(productID);
             }
-            db.Products.RemoveRange(findedProduct);
-            db.SaveChangesAsync();
+
+            var findedOrder = db.SalesOrderDetails.Where(c => c.ProductId == productID).ToList();
+            if (findedOrder != null)
+            {
+                db.SalesOrderDetails.RemoveRange(findedOrder);           
+            }
+
+            db.Products.Remove(findedProduct);
+            db.SaveChanges();
 
             return Results.Ok();
 
