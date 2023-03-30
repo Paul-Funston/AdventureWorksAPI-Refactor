@@ -44,7 +44,7 @@ namespace AdventureWorksAPI.AddressMethods
             }
             else
             {
-                Address address = db.Addresses.Include(b => b.CustomerAddresses).ThenInclude(b => b.Customer).FirstOrDefault(b => b.AddressId == id);
+                Address address = db.Addresses.Find(id);
                 db.Addresses.Remove(address);
                 db.SaveChanges();
                 return Results.Ok();
