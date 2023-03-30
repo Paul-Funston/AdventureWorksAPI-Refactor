@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
-
+ 
 // SERVICES
 builder.Services.AddDbContext<AdventureWorksLt2019Context>(options =>
 {
@@ -49,7 +49,7 @@ app.MapPut("/product", ProductMethod.UpdateProduct);
 
 app.MapDelete("/product", ProductMethod.DeleteProduct);
 
-
+app.MapGet("/product/details/{productID}", ProductMethod.GetProductDetail);  
 
 // SalesOrderHeader
 app.MapGet("/saleorderheader", SaleOrderHeaderMethod.GetOrder);
