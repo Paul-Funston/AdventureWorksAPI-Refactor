@@ -11,8 +11,12 @@ namespace AdventureWorksAPI.Product
 {
     public static class ProductMethod
     {
-        public static IResult GetProduct(AdventureWorksLt2019Context db, int productID)
+        public static IResult GetProduct(AdventureWorksLt2019Context db, int? productID)
         {
+            if (productID == null)
+            {
+                return Results.Ok(db.Products.ToList());
+            }
             var product = db.Products.Where(p => p.ProductId == productID).FirstOrDefault();
             if (product == null)
             {
