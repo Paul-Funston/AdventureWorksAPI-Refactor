@@ -54,7 +54,7 @@ namespace AdventureWorksAPI.SaleOrderHeader
                 return Results.NotFound(orderID);
             }
             db.SalesOrderHeaders.RemoveRange(findedOrder);
-            db.SaveChangesAsync();
+            db.SaveChanges();;
 
             return Results.Ok();
 
