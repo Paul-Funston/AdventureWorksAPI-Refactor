@@ -1,11 +1,18 @@
 ﻿using AdventureWorksAPI.Models;
+using Microsoft.CodeAnalysis;
 
 namespace AdventureWorksAPI.SaleOrderHeader
 {
     public static class SaleOrderHeaderMethod
     {
-        public static IResult GetOrder(AdventureWorksLt2019Context db, int orderID)
+
+        public static IResult GetOrder(AdventureWorksLt2019Context db, int? orderID)
         {
+            if (orderID == null)
+            {
+                return Results.Ok(db.SalesOrderHeaders.ToList());
+            }
+
             var order = db.SalesOrderHeaders.Where(p => p.SalesOrderId == orderID).FirstOrDefault();
             if (order == null)
             {
