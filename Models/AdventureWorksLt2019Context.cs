@@ -198,11 +198,11 @@ public partial class AdventureWorksLt2019Context : DbContext
 
             entity.HasOne(d => d.Address).WithMany(p => p.CustomerAddresses)
                 .HasForeignKey(d => d.AddressId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.Cascade);
 
             entity.HasOne(d => d.Customer).WithMany(p => p.CustomerAddresses)
                 .HasForeignKey(d => d.CustomerId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.Cascade);
         });
 
         modelBuilder.Entity<ErrorLog>(entity =>
@@ -410,11 +410,11 @@ public partial class AdventureWorksLt2019Context : DbContext
 
             entity.HasOne(d => d.ProductDescription).WithMany(p => p.ProductModelProductDescriptions)
                 .HasForeignKey(d => d.ProductDescriptionId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.Cascade);
 
             entity.HasOne(d => d.ProductModel).WithMany(p => p.ProductModelProductDescriptions)
                 .HasForeignKey(d => d.ProductModelId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.Cascade);
         });
 
         modelBuilder.Entity<SalesOrderDetail>(entity =>
@@ -463,7 +463,7 @@ public partial class AdventureWorksLt2019Context : DbContext
 
             entity.HasOne(d => d.Product).WithMany(p => p.SalesOrderDetails)
                 .HasForeignKey(d => d.ProductId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.Cascade);
 
             entity.HasOne(d => d.SalesOrder).WithMany(p => p.SalesOrderDetails).HasForeignKey(d => d.SalesOrderId);
         });
@@ -563,7 +563,7 @@ public partial class AdventureWorksLt2019Context : DbContext
 
             entity.HasOne(d => d.Customer).WithMany(p => p.SalesOrderHeaders)
                 .HasForeignKey(d => d.CustomerId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+                .OnDelete(DeleteBehavior.Cascade);
 
             entity.HasOne(d => d.ShipToAddress).WithMany(p => p.SalesOrderHeaderShipToAddresses)
                 .HasForeignKey(d => d.ShipToAddressId)
