@@ -29,6 +29,9 @@ app.MapGet("/customers/{id?}", CustomerMethods.GetCustomers);
 app.MapPost("/customers/create", CustomerMethods.AddCustomer);
 app.MapPut("/customers/update/{id}", CustomerMethods.UpdateCustomer);
 app.MapPut("/customers/delete/{id}", CustomerMethods.DeleteCustomer);
+app.MapPost("/customers/addToAddress/customer={CustomerId}&address={AddressId}", CustomerMethods.AddCustomerToAddress);
+app.MapGet("/customers/details/{id}", CustomerMethods.FindAddressesInCustomer);
+
 
 
 // Product

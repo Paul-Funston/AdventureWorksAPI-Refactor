@@ -1,4 +1,5 @@
 ﻿using AdventureWorksAPI.Models;
+using NuGet.Protocol;
 using System.Globalization;
 using System.Net;
 
@@ -73,6 +74,54 @@ namespace AdventureWorksAPI.CustomerMethod
 
                 return Results.Ok();
             }
+        }
+
+        public static IResult AddCustomerToAddress(AdventureWorksLt2019Context db, int CustomerId, int AddressId)
+        {
+            Customer customer = db.Customers.First(c => c.CustomerId == CustomerId);
+            Address address = db.Addresses.First(a => a.AddressId == AddressId);
+            CustomerAddress customerAddress = new CustomerAddress();
+
+            if (customer != null || address != null)
+            {
+                customerAddress.CustomerId = CustomerId;
+                customerAddress.AddressId = AddressId;
+                customerAddress.AddressType = "Main Office";
+                customerAddress.Rowguid = new Guid();
+                customerAddress.ModifiedDate = DateTime.Now;
+
+                db.CustomerAddresses.Add(customerAddress);
+                db.SaveChanges();
+                return Results.Ok();
+            }
+
+            return Results.BadRequest();
+        }
+
+        /*
+            Customer/Details<PrimaryKey> and Address/Details<PrimaryKey> should also list their related Customers/Addresses using the CustomerAddress middle table in the returned JSON. 
+        */
+
+        public static IResult FindAddressesInCustomer(AdventureWorksLt2019Context db, int id)
+        {
+            Customer customer = db.Customers.Find(id);
+
+            if(customer != null) 
+            {
+                List<CustomerAddress> customerAddresses = db.CustomerAddresses.Where(ca => ca.CustomerId == id).ToList();
+
+                List<Address> addresses = db.Addresses.Where(a => a.CustomerAddresses.Any(ca => ca.CustomerId == id)).ToList();
+
+                var obj = new
+                {
+                    Address = addresses.Select(a => new { a.AddressId, a.AddressLine1, a.AddressLine2, a.City, a.CountryRegion }),
+                    Customer = new { customer.CustomerId, customer.Title, customer.FirstName, customer.MiddleName, customer.LastName }
+                };
+
+                return Results.Ok(obj);
+            }
+
+            return Results.BadRequest();
         }
     }
 }
