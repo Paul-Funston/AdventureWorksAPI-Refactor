@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
-
+using System.Text.Json;
 
 namespace AdventureWorksAPI.AddressMethods
 {
@@ -79,5 +79,34 @@ namespace AdventureWorksAPI.AddressMethods
                 return Results.Created($"address/details?id={address.AddressId}", address);
             }
         }
+
+        public static IResult FindCustomerInAddress(AdventureWorksLt2019Context db, int id)
+        {
+            if (id != null)
+            {
+                Address addresses = db.Addresses.Find(id);
+                if (addresses != null)
+                {
+                    HashSet<CustomerAddress> customerAddresses = db.CustomerAddresses.Where(c => c.AddressId == id).ToHashSet();
+                    HashSet<Customer> customer = db.Customers.Where(c => c.CustomerAddresses.Any(ca => ca.AddressId == id)).ToHashSet();
+                    var obj = new
+                    {
+
+                        Customer = customer.Select(c => new { c.CustomerId, c.FirstName, c.SalesPerson, c.Phone, c.CompanyName, c.EmailAddress }),
+                        Address = new { addresses.AddressId, addresses.AddressLine1, addresses.AddressLine2, addresses.CountryRegion, addresses.StateProvince, addresses.City, addresses.PostalCode, addresses.ModifiedDate, addresses.Rowguid }
+
+                    };
+                    return Results.Ok(obj);
+                }
+                else
+                {
+                    return Results.BadRequest();
+                }
+            }
+            else
+            {
+                return Results.BadRequest();
+            }
+         }
     }
 }
