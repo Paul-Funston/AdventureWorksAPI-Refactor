@@ -7,6 +7,7 @@ using Lab3.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using AdventureWorksAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
  
@@ -17,7 +18,11 @@ builder.Services.AddDbContext<AdventureWorksLt2019Context>(options =>
 });
 builder.Services.AddControllersWithViews()
                 .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+builder.Services.AddScoped<IAddressRepo, AddressRepository>();
 var app = builder.Build();
+
+
 
 /*----- END POINTS ----- */
 
