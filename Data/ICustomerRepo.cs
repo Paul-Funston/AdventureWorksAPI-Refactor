@@ -1,6 +1,15 @@
-﻿namespace AdventureWorksAPI.Data
+﻿using AdventureWorksAPI.Models;
+
+namespace AdventureWorksAPI.Data
 {
-    public class ICustomerRepo
+    public interface ICustomerRepo
     {
+        public ICollection<Customer> GetCustomers();
+        public Customer GetCustomer(int id);
+        public void CreateCustomer(Customer customer);
+       
+
+
+
     }
 }
