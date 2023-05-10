@@ -34,50 +34,31 @@ namespace AdventureWorksAPI.CustomerMethod
         }
 
         // UPDATE: UpdateCustomer
-        public static IResult UpdateCustomer(AdventureWorksLt2019Context db, int id, Customer customer)
+        public static IResult UpdateCustomer(ICustomerRepo Repo, int id, Customer customer)
         {
-            //Customer updatingCustomer = db.Customers.Find(id);
-
-            if(updatingCustomer == null)
+            if(customer== null)
             {
-                db.Customers.Add(customer);
-                db.SaveChanges();
+                return Results.NotFound();
+            } 
 
-                return Results.Created($"/customer?id={customer.CustomerId}", customer);
-            } else
-            {
-                updatingCustomer.Title = customer.Title;
-                updatingCustomer.FirstName = customer.FirstName;
-                updatingCustomer.MiddleName = customer.MiddleName;
-                updatingCustomer.LastName = customer.LastName;
-                updatingCustomer.Suffix = customer.Suffix;
-                updatingCustomer.CompanyName = customer.CompanyName;
-                updatingCustomer.SalesPerson = customer.SalesPerson;
-                updatingCustomer.EmailAddress = customer.EmailAddress;
-                updatingCustomer.Phone = customer.Phone;
-                updatingCustomer.ModifiedDate = customer.ModifiedDate;
+            Repo.UpdateCustomer(id, customer);
+            
+            return Results.Ok("Customer updated successfully");
 
-                db.SaveChanges();
-                return Results.Ok();
-            }
+
         }
 
         // DELETE: DeleteCustomer
-        public static IResult DeleteCustomer(AdventureWorksLt2019Context db, int id)
+        public static IResult DeleteCustomer(ICustomerRepo Repo, Customer customer)
         {
-            Customer customer = db.Customers.Find(id);
-
-            if (customer == null)
+            if(customer == null)
             {
-                return Results.BadRequest();
-            }
-            else
-            {
-                db.Customers.Remove(customer);
-                db.SaveChanges();
+                return Results.NotFound();
+            } 
 
-                return Results.Ok();
-            }
+            Repo.DeleteCustomer(customer);
+
+            return Results.Ok("Customer deleted successfully");
         }
 
         public static IResult AddCustomerToAddress(AdventureWorksLt2019Context db, int CustomerId, int AddressId)
