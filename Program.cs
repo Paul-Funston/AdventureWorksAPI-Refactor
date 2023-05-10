@@ -21,6 +21,7 @@ builder.Services.AddControllersWithViews()
 
 builder.Services.AddScoped<IAddressRepo, AddressRepository>();
 builder.Services.AddScoped<ICustomerAddressRepo, CustomerAddressRepo>();
+builder.Services.AddScoped<ICustomerRepo, CustomerRepo>();
 var app = builder.Build();
 
 
