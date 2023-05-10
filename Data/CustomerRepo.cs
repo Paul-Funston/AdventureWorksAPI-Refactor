@@ -30,13 +30,30 @@ namespace AdventureWorksAPI.Data
         {
             Customer updatingCustomer = _context.Customers.Find(id);
 
-            if (updatingCustomer == null)
-            {
-                _context.Customers.Add(customer);
+            updatingCustomer.Title = customer.Title;
+            updatingCustomer.FirstName = customer.FirstName;
+            updatingCustomer.MiddleName = customer.MiddleName;
+            updatingCustomer.LastName = customer.LastName;
+            updatingCustomer.Suffix = customer.Suffix;
+            updatingCustomer.CompanyName = customer.CompanyName;
+            updatingCustomer.SalesPerson = customer.SalesPerson;
+            updatingCustomer.EmailAddress = customer.EmailAddress;
+            updatingCustomer.Phone = customer.Phone;
+            updatingCustomer.ModifiedDate = customer.ModifiedDate;
 
-                _context.SaveChanges();
-            } 
+            _context.SaveChanges();
+
+            
         }
-        
+        public void DeleteCustomer(Customer customer)
+        {
+            
+            _context.Customers.Remove(customer);
+
+            _context.SaveChanges();
+
+        }
+
+
     }
 }
