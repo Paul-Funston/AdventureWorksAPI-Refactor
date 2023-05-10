@@ -2,6 +2,7 @@
 using NuGet.Protocol;
 using System.Globalization;
 using System.Net;
+using AdventureWorksAPI.Data;
 
 namespace AdventureWorksAPI.CustomerMethod
 {
@@ -9,22 +10,21 @@ namespace AdventureWorksAPI.CustomerMethod
     {
 
         // READ: GetCustomers and GetCustomer
-        public static IResult GetCustomers(AdventureWorksLt2019Context db, int? id, int maxResults = 100)
+        public static IResult GetCustomers(ICustomerRepo Repo, int? id, int maxResults = 100)
         {
             if(id == null)
             {
-                return Results.Ok(db.Customers.Take(maxResults).ToList());
+                return Results.Ok(Repo.GetCustomers());
             } else
             {
-                return Results.Ok(db.Customers.Where(c => c.CustomerId == id));
+                return Results.Ok(Repo.GetCustomer((int)id));
             }
         }
 
         // CREATE: CreateCustomer 
-        public static IResult AddCustomer(AdventureWorksLt2019Context db, Customer customer)
+        public static IResult AddCustomer(ICustomerRepo Repo, Customer customer)
         {
-            db.Customers.Add(customer);
-            db.SaveChanges();
+            Repo.CreateCustomer(customer);
 
             return Results.Created($"/customer?id={customer.CustomerId}", customer);
         }
