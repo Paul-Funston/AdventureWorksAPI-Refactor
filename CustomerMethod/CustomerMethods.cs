@@ -24,15 +24,19 @@ namespace AdventureWorksAPI.CustomerMethod
         // CREATE: CreateCustomer 
         public static IResult AddCustomer(ICustomerRepo Repo, Customer customer)
         {
+            int id = Repo.CreateCustomer(customer);
+
             Repo.CreateCustomer(customer);
 
-            return Results.Created($"/customer?id={customer.CustomerId}", customer);
+            Customer createdCustomer = Repo.GetCustomer(id);
+
+            return Results.Created($"/customer?id={id}", createdCustomer);
         }
 
         // UPDATE: UpdateCustomer
         public static IResult UpdateCustomer(AdventureWorksLt2019Context db, int id, Customer customer)
         {
-            Customer updatingCustomer = db.Customers.Find(id);
+            //Customer updatingCustomer = db.Customers.Find(id);
 
             if(updatingCustomer == null)
             {
