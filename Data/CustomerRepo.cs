@@ -19,10 +19,12 @@ namespace AdventureWorksAPI.Data
             return _context.Customers.Find(id);
         }
 
-        public void CreateCustomer(Customer customer)
+        public int CreateCustomer(Customer customer)
         {
             _context.Customers.Add(customer);
             _context.SaveChanges();
+
+            return customer.CustomerId;
         }
         public void UpdateCustomer(int id, Customer customer)
         {
