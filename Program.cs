@@ -20,6 +20,7 @@ builder.Services.AddControllersWithViews()
                 .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 builder.Services.AddScoped<IAddressRepo, AddressRepository>();
+builder.Services.AddScoped<ICustomerAddressRepo, CustomerAddressRepo>();
 var app = builder.Build();
 
 
