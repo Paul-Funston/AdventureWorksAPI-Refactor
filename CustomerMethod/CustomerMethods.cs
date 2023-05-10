@@ -36,7 +36,7 @@ namespace AdventureWorksAPI.CustomerMethod
         // UPDATE: UpdateCustomer
         public static IResult UpdateCustomer(AdventureWorksLt2019Context db, int id, Customer customer)
         {
-            Customer updatingCustomer = db.Customers.Find(id);
+            //Customer updatingCustomer = db.Customers.Find(id);
 
             if(updatingCustomer == null)
             {
